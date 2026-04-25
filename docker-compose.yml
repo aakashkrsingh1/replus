@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+
+  executor:
+    build: ./executor-go
+    container_name: go-executor
+    ports:
+      - "8081:8081"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - HOST_WORKDIR=/Users/aakashkrsingh1/Projects/replus/executor-go
+
+  backend:
+    build: ./backend
+    container_name: django-backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - executor
+    environment:
+      - EXECUTOR_URL=http://executor:8081

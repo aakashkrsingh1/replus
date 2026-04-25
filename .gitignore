@@ -1,0 +1,21 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Go
+*.exe
+*.out
+bin/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Docker
+*.env
+
+# VS Code
+.vscode/
