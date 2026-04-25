@@ -1,5 +1,7 @@
 package executor
 
+import "time"
+
 type PythonExecutor struct {
 	BaseExecutor
 }
@@ -9,5 +11,6 @@ func (p PythonExecutor) Execute(code string) (string, error) {
 		code,
 		"main.py",
 		[]string{"python3", "{file}"},
+		2*time.Second,
 	)
 }

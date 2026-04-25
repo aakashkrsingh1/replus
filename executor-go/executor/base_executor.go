@@ -15,6 +15,7 @@ func (b BaseExecutor) runLocalCommand(
 	code string,
 	fileName string,
 	command []string,
+	timeout time.Duration,
 ) (string, error) {
 
 	// Create temp dir
@@ -63,7 +64,7 @@ func (b BaseExecutor) runLocalCommand(
 		}
 		return string(output), nil
 
-	case <-time.After(2 * time.Second):
+	case <-time.After(timeout):
 		// timeout reached → kill process group
 		if cmd.Process != nil {
 			syscall.Kill(-cmd.Process.Pid, syscall.SIGKILL)

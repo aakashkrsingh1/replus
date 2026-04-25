@@ -17,7 +17,7 @@ def run_code(request):
                     "code": data.get("code"),
                     "language": data.get("language")
                 },
-                timeout=(3,10)
+                timeout=(3,15)
             )
 
             return JsonResponse(response.json())
