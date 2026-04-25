@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-!ytt66u4*0msaw)%pvh5yiwad5%o3ap(#f5x2*)@&k*p%eoxu*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["replus-backend.onrender.com",
+    "localhost",
+    "127.0.0.1"
+    ]
 
 
 # Application definition
