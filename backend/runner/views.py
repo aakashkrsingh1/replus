@@ -28,10 +28,11 @@ def run_code(request):
 
             executor_output= response.json();
             return JsonResponse({
-                    "output": executor_output.get("output", ""),
-                    "time": f"{(end - start)*1000:.2f} ms",
-                    "status": "success" if response.status_code == 200 else "error"
-                })
+                                "output": executor_output.get("output", ""),
+                                "status": executor_output.get("status", "error"),
+                                "execution_time": executor_output.get("execution_time"),
+                                "total_time": f"{(end - start)*1000:.2f} ms"
+                            })
 
         except requests.exceptions.RequestException as e:
             return JsonResponse({

@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>🚀 Replus Code Runner</h1>
+  <h1> Repl-us Code Runner</h1>
 
   <label>Language:</label>
   <select [(ngModel)]="language" (change)="onLanguageChange()">
@@ -19,10 +19,19 @@
   </button>
 
   <p *ngIf="status">
-    {{ status === 'success' ? '✅ Success' : '❌ Error' }}
+    <span *ngIf="status === 'success'">✅ Success</span>
+    <span *ngIf="status === 'compile_error'">🛑 Compile Error</span>
+    <span *ngIf="status === 'runtime_error'">⚠️ Runtime Error</span>
+    <span *ngIf="status === 'timeout'">⏳ Timeout</span>
     | ⏱ {{ executionTime }}
+    | ⏳ Total Time: {{ totalTime }}
   </p>
 
-  <h3>Output:</h3>
-  <pre>{{ output }}</pre>
+ <h3>Output:</h3>
+
+<pre class="output-box">{{ output }}</pre>
+
+<button class="copy-btn" (click)="copyOutput()">
+  📋 Copy Output
+</button>
 </div>

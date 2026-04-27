@@ -1,44 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+/* GLOBAL RETRO THEME */
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #e2e8f0;
+  font-family: "Courier New", monospace;
+  background: #000;
+  color: #00ff9f;
 }
 
+/* CRT scanline effect */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,255,159,0.05),
+    rgba(0,255,159,0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Container */
 .container {
   max-width: 1000px;
   margin: auto;
   padding: 20px;
+  background: rgba(0,0,0,0.9);
+  border: 1px solid #00ff9f;
+  box-shadow: 0 0 20px #00ff9f33;
+  border-radius: 10px;
 }
 
-h1 {
+/* Headings */
+h1, h2, h3 {
   text-align: center;
-  margin-bottom: 20px;
+  text-shadow: 0 0 5px #00ff9f;
 }
 
-select, textarea, button {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
+/* Inputs */
+select, textarea {
+  background: #020617;
+  color: #00ff9f;
+  border: 1px solid #00ff9f;
+  font-family: "Courier New", monospace;
 }
 
+/* Buttons */
 button {
-  background: #3b82f6;
-  color: white;
+  background: #00ff9f;
+  color: black;
+  font-weight: bold;
   cursor: pointer;
+  border-radius: 6px;
 }
 
-button:disabled {
-  background: #64748b;
-  cursor: not-allowed;
+button:hover {
+  background: #00cc7a;
 }
 
+/* Output */
 pre {
   background: #020617;
   padding: 15px;
   border-radius: 8px;
-  margin-top: 10px;
+  border: 1px solid #00ff9f;
+  color: #00ff9f;
+  box-shadow: inset 0 0 10px #00ff9f22;
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"time"
 
 	"executor/model"
 	"executor/worker"
@@ -32,7 +33,8 @@ func main() {
 			return
 		}
 
-		resultChan := make(chan string)
+		resultChan := make(chan model.Result)
+		start := time.Now()
 
 		job := model.Job{
 			Code:     req.Code,
@@ -42,10 +44,14 @@ func main() {
 
 		jobs <- job
 
-		output := <-resultChan
+		res := <-resultChan
+		duration := time.Since(start)
 
 		c.JSON(http.StatusOK, gin.H{
-			"output": output,
+			"output":         res.Output,
+			"status":         res.Status,
+			"execution_time": res.Time,
+			"total_time":     duration.String(),
 		})
 	})
 

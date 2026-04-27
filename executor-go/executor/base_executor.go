@@ -1,6 +1,7 @@
 package executor
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -60,15 +61,15 @@ func (b BaseExecutor) runLocalCommand(
 	case <-done:
 		// finished normally
 		if runErr != nil {
-			return string(output) + "\nError: " + runErr.Error(), nil
+			return string(output), runErr
 		}
-		return string(output), nil
+		return string(output), runErr
 
 	case <-time.After(timeout):
 		// timeout reached → kill process group
 		if cmd.Process != nil {
 			syscall.Kill(-cmd.Process.Pid, syscall.SIGKILL)
 		}
-		return "Execution timed out", nil
+		return "", fmt.Errorf("timeout")
 	}
 }

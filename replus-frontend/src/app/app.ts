@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   isLoading = false;
   executionTime: string = '';  
+  totalTime: string = '';
   status: string = '';         
   templates: any = {
     python: "print('Hello World')",
@@ -43,14 +44,16 @@ export class AppComponent implements OnInit {
           }`
   };
 
-  code = "print('Hello from Angular')";
+  code = "print('Hello from Repl-us')";
   language = 'python';
   output = '';
   editorOptions = {
   theme: 'vs-dark',
   language: 'python',
-  automaticLayout: true
-  };
+  fontFamily: 'Courier New',
+  fontSize: 14,
+  minimap: { enabled: false }
+};
   onLanguageChange() {
   this.code = this.templates[this.language];
 
@@ -71,7 +74,17 @@ export class AppComponent implements OnInit {
       language: "python"
     }).subscribe();
   }
+copyOutput() {
+  if (!this.output) return;
 
+  navigator.clipboard.writeText(this.output)
+    .then(() => {
+      console.log("Copied!");
+    })
+    .catch(err => {
+      console.error("Copy failed", err);
+    });
+}
 
   runCode() {
   this.isLoading = true;
@@ -85,7 +98,8 @@ export class AppComponent implements OnInit {
       console.log('API Response:', res);
       this.output = res.output;
       // this.output = "TEST OUTPUT"
-      this.executionTime = res.time;
+      this.executionTime = res.execution_time;
+      this.totalTime = res.total_time;
       this.status = res.status;
       this.isLoading = false;
 
