@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>🚀 Replus Code Runner</h1>
+
+  <label>Language:</label>
+  <select [(ngModel)]="language" (change)="onLanguageChange()">
+    <option value="python">Python</option>
+    <option value="java">Java</option>
+    <option value="cpp">C++</option>
+  </select>
+
+  <ngx-monaco-editor
+    [(ngModel)]="code"
+    [options]="editorOptions"
+    style="height: 400px; margin-top: 10px;">
+  </ngx-monaco-editor>
+
+  <button (click)="runCode()" [disabled]="isLoading">
+    {{ isLoading ? 'Running...' : 'Run Code' }}
+  </button>
+
+  <p *ngIf="status">
+    {{ status === 'success' ? '✅ Success' : '❌ Error' }}
+    | ⏱ {{ executionTime }}
+  </p>
+
+  <h3>Output:</h3>
+  <pre>{{ output }}</pre>
+</div>
